@@ -1,4 +1,4 @@
-This example uses a simple maven based webapp project.
+This uses a test maven based webapp project.
 
 For build use : mvn clean package
 
