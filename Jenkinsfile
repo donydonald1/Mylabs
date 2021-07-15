@@ -32,7 +32,21 @@ pipeline{
         // Stage3 : Publish the artifacts to Nexus
         stage ('Publish to Nexus'){
             steps {
-                nexusArtifactUploader artifacts: [[artifactId: 'DonaldDevOpsLab', classifier: '', file: 'target/DonaldDevOpsLab-0.0.3-SNAPSHOT.war', type: 'war']], credentialsId: '3d2b504b-f147-4df3-a3d7-1986fa1cb835', groupId: 'com.donalddevopslab', nexusUrl: '172.20.10.246:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'DonaldDevOpsLab-SNAPSHOT', version: '0.0.3-SNAPSHOT'
+                script {
+                def nexusRepo = version.endsWith("SNAPSHOT") ? "DonaldDevOpsLab-SNAPSHOT" : "DonaldDevOpsLab-RELEASE"
+                nexusArtifactUploader artifacts: 
+                [[artifactId: "${ArtifactId}", 
+                classifier: '', 
+                file: "target/${ArtifactId}-${Version}.war", 
+                type: 'war']], 
+                credentialsId: '3d2b504b-f147-4df3-a3d7-1986fa1cb835', 
+                groupId: "${GroupId}", 
+                nexusUrl: '172.20.10.246:8081', 
+                nexusVersion: 'nexus3', 
+                protocol: 'http', 
+                repository: "${NexusRepo}", 
+                version: "${Version}"
+                }
             }
         }
 
