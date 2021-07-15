@@ -10,7 +10,6 @@ pipeline{
        Name = readMavenPom().getName()
        GroupId = readMavenPom().getGroupId()
     }
-  
     stages {
         // Specify various stage with in stages
 
@@ -25,7 +24,6 @@ pipeline{
         stage ('Test'){
             steps {
                 echo ' testing......'
-
             }
         }
 
